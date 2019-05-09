@@ -23,7 +23,7 @@ async function getSize() {
     });
 };
 
-async function getIu_parts() {
+async function getIuParts() {
     const script = `return gptLayer.slots.map((e) => {return e.getAdUnitPath()})`
     return browser.wait(() => browser.executeScript(script), 20000).then(() => browser.executeScript(script));
 };
@@ -31,6 +31,6 @@ async function getIu_parts() {
 module.exports = {
     getTargetingMap,
     getSize,
-    getIu_parts,
+    getIuParts,
     getPageInfo
 };

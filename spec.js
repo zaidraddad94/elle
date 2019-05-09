@@ -2,100 +2,96 @@ const helper = require('./helper');
 const target = require('./target');
 
 describe('Ads', () => {
-    let adsTargeting, adsSize, iu_parts
+    let adsTargeting, adsSize, iuParts
 
-    beforeAll(async () => {
+    beforeAll(() => {
         browser.get('https://www.elle.com/culture/celebrities/a27267952/kate-beckinsale-pete-davidson-not-dating-anymore/').then(() => {
-            browser.wait(helper.getTargetingMap(), 20000)
-        browser.actions().mouseMove(element(by.css('.transporter'))).perform().then(() => {
-                browser.actions().mouseMove(element(by.css('.footer'))).perform();
-            })
-        })
-       
-        adsTargeting = await helper.getTargetingMap();
-        adsSize = await helper.getSize();
-        iu_parts = await helper.getIu_parts();
+            browser.actions().mouseMove(element(by.css('.footer'))).perform().then(async () => {
+                adsTargeting = await helper.getTargetingMap();
+                adsSize = await helper.getSize();
+                iuParts = await helper.getIuParts();
+            });
+        });
     });
 
     describe('Page Info', () => {
-        let PageInfo
+        let pageInfo;
+
         beforeAll(async () => {
-            PageInfo = await helper.getPageInfo();
+            pageInfo = await helper.getPageInfo();
         });
 
         it(`should have the page name of ${target.page.targeting.site}`, () => {
-            expect(PageInfo.site).toEqual(target.page.targeting.site);
+            expect(pageInfo.site).toEqual(target.page.targeting.site);
         });
 
-        it(`should have IOM of ${target.page.targeting.IOM}`, () => {
-            expect(PageInfo.IOM).toEqual(target.page.targeting.IOM);
+        it(`should have the InfoIOM of ${target.page.targeting.IOM}`, () => {
+            expect(pageInfo.IOM).toEqual(target.page.targeting.IOM);
         });
 
-        it(`should have artid of ${target.page.targeting.artid}`, () => {
-            expect(PageInfo.artid).toEqual(target.page.targeting.artid);
+        it(`should have the id of ${target.page.targeting.artid}`, () => {
+            expect(pageInfo.artid).toEqual(target.page.targeting.artid);
         });
 
-        it(`should have cat of ${target.page.targeting.cat}`, () => {
-            expect(PageInfo.cat).toEqual(target.page.targeting.cat);
+        it(`should have the cat of ${target.page.targeting.cat}`, () => {
+            expect(pageInfo.cat).toEqual(target.page.targeting.cat);
         });
 
-        it(`should have dnt of ${target.page.targeting.dnt}`, () => {
-            expect(PageInfo.dnt).toEqual(target.page.targeting.dnt);
+        it(`should have the dnt of ${target.page.targeting.dnt}`, () => {
+            expect(pageInfo.dnt).toEqual(target.page.targeting.dnt);
         });
 
-        it(`should have lpid of ${target.page.targeting.lpid}`, () => {
-            expect(PageInfo.lpid).toEqual(target.page.targeting.lpid);
+        it(`should have the lpid of ${target.page.targeting.lpid}`, () => {
+            expect(pageInfo.lpid).toEqual(target.page.targeting.lpid);
         });
 
-        it(`should have orgpub of ${target.page.targeting.orgpub}`, () => {
-            expect(PageInfo.orgpub).toEqual(target.page.targeting.orgpub);
+        it(`should have the orgpub of ${target.page.targeting.orgpub}`, () => {
+            expect(pageInfo.orgpub).toEqual(target.page.targeting.orgpub);
         });
 
-        it(`should have page of ${target.page.targeting.page}`, () => {
-            expect(PageInfo.page).toEqual(target.page.targeting.page);
+        it(`should have the page of ${target.page.targeting.page}`, () => {
+            expect(pageInfo.page).toEqual(target.page.targeting.page);
         });
 
-        it(`should have pageurl of ${target.page.targeting.pageurl}`, () => {
-            expect(PageInfo.pageurl).toEqual(target.page.targeting.pageurl);
+        it(`should have the pageurl of ${target.page.targeting.pageurl}`, () => {
+            expect(pageInfo.pageurl).toEqual(target.page.targeting.pageurl);
         });
 
-        it(`should have refer of ${target.page.targeting.refer}`, () => {
-            expect(PageInfo.refer).toEqual(target.page.targeting.refer);
+        it(`should have the refer of ${target.page.targeting.refer}`, () => {
+            expect(pageInfo.refer).toEqual(target.page.targeting.refer);
         });
 
-        it(`should have sect of ${target.page.targeting.sect}`, () => {
-            expect(PageInfo.sect).toEqual(target.page.targeting.sect);
+        it(`should have the sect of ${target.page.targeting.sect}`, () => {
+            expect(pageInfo.sect).toEqual(target.page.targeting.sect);
         });
 
-        it(`should have site of ${target.page.targeting.site}`, () => {
-            expect(PageInfo.site).toEqual(target.page.targeting.site);
+        it(`should have the site of ${target.page.targeting.site}`, () => {
+            expect(pageInfo.site).toEqual(target.page.targeting.site);
         });
 
-        it(`should have src of ${target.page.targeting.src}`, () => {
-            expect(PageInfo.src).toEqual(target.page.targeting.src);
+        it(`should have the src of ${target.page.targeting.src}`, () => {
+            expect(pageInfo.src).toEqual(target.page.targeting.src);
         });
 
-        it(`should have sub of ${target.page.targeting.sub}`, () => {
-            expect(PageInfo.sub).toEqual(target.page.targeting.sub);
+        it(`should have the sub of ${target.page.targeting.sub}`, () => {
+            expect(pageInfo.sub).toEqual(target.page.targeting.sub);
         });
 
-        it(`should have tool of ${target.page.targeting.tool}`, () => {
-            expect(PageInfo.tool).toEqual(target.page.targeting.tool);
+        it(`should have the tool of ${target.page.targeting.tool}`, () => {
+            expect(pageInfo.tool).toEqual(target.page.targeting.tool);
         });
 
-        it(`should have type of ${target.page.targeting.type}`, () => {
-            expect(PageInfo.type).toEqual(target.page.targeting.type);
+        it(`should have the type of ${target.page.targeting.type}`, () => {
+            expect(pageInfo.type).toEqual(target.page.targeting.type);
         });
 
-        it(`should have viewport of ${target.page.targeting.viewport}`, () => {
-            expect(PageInfo.viewport).toEqual(target.page.targeting.viewport);
+        it(`should have the viewport of ${target.page.targeting.viewport}`, () => {
+            expect(pageInfo.viewport).toEqual(target.page.targeting.viewport);
         });
     });
 
     target.page.ads.forEach((ad, i) => {
-
-        describe(`tests for ${ad.position} position`, () => {
-
+        describe(`${ad.position} position`, () => {
             it(`should have the adid ${ad.adid}`, () => {
                 expect(adsTargeting[i].pos).toEqual(ad.pos);
             });
@@ -113,7 +109,7 @@ describe('Ads', () => {
             });
 
             it(`should have the iu - parts  [${ad.iu.split("/")}]`, () => {
-                expect(iu_parts[i]).toEqual(ad.iu);
+                expect(iuParts[i]).toEqual(ad.iu);
             });
 
             it(`should have the sizes ${ad.sizes}`, () => {
